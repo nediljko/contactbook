@@ -1,0 +1,48 @@
+{
+  "name": "contactbook",
+  "version": "1.0.0",
+  "description": "Simple client for personal contacts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nediljko/contactbook.git"
+  },
+  "author": "nediljko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nediljko/contactbook/issues"
+  },
+  "homepage": "https://github.com/nediljko/contactbook#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@poi/plugin-eslint": "^12.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-semistandard": "^13.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.2.2",
+    "poi": "^12.6.10",
+    "sass-loader": "^7.1.0",
+    "stylelint": "^10.0.1",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-order": "^3.0.0",
+    "stylelint-scss": "^3.8.0"
+  },
+  "dependencies": {
+    "@mdi/font": "^3.6.95",
+    "bulma": "^0.7.5",
+    "cuid": "^2.1.6",
+    "jsend": "^1.0.2",
+    "lodash": "^4.17.11",
+    "sass-web-fonts": "^2.1.0",
+    "v-hotkey": "^0.4.0",
+    "vee-validate": "^2.2.9",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6",
+    "vuex": "^3.1.1"
+  }
+}
