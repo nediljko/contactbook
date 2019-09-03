@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <header class="app-header">
-      Typeqast
+      <span class="title">{{ name }}</span>
     </header>
     <main class="app-content container">
       <section class="section">
@@ -13,9 +13,32 @@
 
 <script>
 export default {
-  name: 'home'
+  name: 'home',
+  computed: {
+    name() {
+      const name = 'typeqast';
+      return name.toUpperCase();
+    }
+  }
 };
 </script>
 
 <style lang="scss">
+@import '../stylesheets/main';
+@import '../stylesheets/theme';
+
+.app-header {
+  background: $twitter-header-gradient;
+  overflow: auto;
+
+  .title {
+    display: block;
+    color: $white;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    margin-bottom: 0.4rem;
+    background: $twitter-title-gradient;
+  }
+}
 </style>
