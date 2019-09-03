@@ -11,7 +11,7 @@ module.exports = {
   plugins: ['@poi/eslint'],
   entry: {
     app: 'client/main.js'
- },
+  },
   chainWebpack(config) {
     config.resolve.extensions.merge(extensions);
   },
