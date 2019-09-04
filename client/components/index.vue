@@ -3,7 +3,7 @@
     <header class="app-header">
       <span class="title">{{ name }}</span>
     </header>
-    <main class="app-content container">
+    <main class="app-content">
       <section class="section">
         <router-view />
       </section>
@@ -35,6 +35,10 @@ export default {
 <style lang="scss" scoped>
 @import '../stylesheets/main';
 @import '../stylesheets/theme';
+
+.app-content {
+  margin: 0 5%;
+}
 
 .app-header {
   background: $twitter-header-gradient;

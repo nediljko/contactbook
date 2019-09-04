@@ -1,22 +1,28 @@
 <template>
   <div class="columns is-multiline">
-    <div class="column is-5 is-offset-1 has-text-right contacts-tab">
-      <button
-        @click="tab = tabs.ALL_CONTACTS"
-        :class="{ 'is-active': tab === tabs.ALL_CONTACTS }"
-        class="tab-button">
-        {{ allContacts }}
-      </button>
+    <div class="column is-12">
+      <div class="columns">
+        <div class="column is-12">
+          <div class="column is-6 has-text-right contacts-tab">
+            <button
+              @click="tab = tabs.ALL_CONTACTS"
+              :class="{ 'is-active': tab === tabs.ALL_CONTACTS }"
+              class="tab-button">
+              {{ allContacts }}
+            </button>
+          </div>
+          <div class="column is-6 favorites-tab">
+            <button
+              @click="tab = tabs.FAVORITES"
+              :class="{ 'is-active': tab === tabs.FAVORITES }"
+              class="tab-button">
+              {{ favoriteContacts }}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-5 favorites-tab">
-      <button
-        @click="tab = tabs.FAVORITES"
-        :class="{ 'is-active': tab === tabs.FAVORITES }"
-        class="tab-button">
-        {{ favoriteContacts }}
-      </button>
-    </div>
-    <div class="column is-10 is-offset-1 filter">
+    <div class="column is-12 filter">
       <div class="field">
         <p class="control has-icons-left has-icons-right is-loading">
           <input class="input" type="text">
@@ -29,13 +35,17 @@
         </p>
       </div>
     </div>
-    <div class="column is-10 is-offset-1">
+    <div class="column is-12">
       <div class="columns is-multiline">
         <div v-if="tab === tabs.ALL_CONTACTS" class="column is-3">
           <card :content="{}" isNew></card>
         </div>
         <div v-for="contact in list" :key="contact.id" class="column is-3">
-          <card :content="contact"></card>
+          <card
+            @click.native="focused = contact"
+            :content="contact"
+            :isFocused="focused.id === contact.id">
+          </card>
         </div>
       </div>
     </div>
@@ -53,7 +63,8 @@ export default {
   name: 'contact-list',
   data() {
     return {
-      tab: ALL_CONTACTS
+      tab: ALL_CONTACTS,
+      focused: {}
     };
   },
   computed: {
