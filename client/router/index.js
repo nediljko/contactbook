@@ -1,4 +1,5 @@
 import ContactDetails from '../components/contacts/Details';
+import ContactEntry from '../components/contacts/Entry';
 import ContactList from '../components/contacts/List';
 import Home from '../components';
 import NotFound from '../components/NotFound';
@@ -21,8 +22,12 @@ const router = new Router({
       path: '/contact-details/:id',
       name: 'contact-details',
       component: ContactDetails
-    }, fallbackRoute]
-  }]
+    }]
+  }, {
+    path: '/contact-entry',
+    name: 'contact-entry',
+    component: ContactEntry
+  }, fallbackRoute]
 });
 
 export default router;
