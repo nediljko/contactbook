@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'home',
   computed: {
@@ -19,6 +21,13 @@ export default {
       const name = 'typeqast';
       return name.toUpperCase();
     }
+  },
+  methods: {
+    ...mapActions('contacts', ['fetch', 'fetchImages'])
+  },
+  created() {
+    this.fetch();
+    this.fetchImages();
   }
 };
 </script>
