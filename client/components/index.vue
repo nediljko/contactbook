@@ -3,7 +3,7 @@
     <header class="app-header">
       <span class="title">{{ name }}</span>
     </header>
-    <main class="app-content">
+    <main class="app-content container">
       <section class="section">
         <router-view />
       </section>
@@ -36,8 +36,8 @@ export default {
 @import '../stylesheets/main';
 @import '../stylesheets/theme';
 
-.app-content {
-  margin: 0 5%;
+.section {
+  padding: 1rem 1.5rem;
 }
 
 .app-header {
@@ -46,11 +46,11 @@ export default {
 
   .title {
     display: block;
+    margin-bottom: 0.4rem;
+    padding: 0.5rem;
     color: $white;
     text-align: center;
     font-size: 1.5rem;
-    padding: 0.5rem;
-    margin-bottom: 0.4rem;
     background: $twitter-title-gradient;
   }
 }
