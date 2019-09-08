@@ -78,10 +78,15 @@ export default {
       const { query, tab, contacts, favorites } = this;
       const list = tab === ALL_CONTACTS ? contacts : favorites;
       if (!query) return list;
+      const neutralQuery = query.toUpperCase();
       return filter(list, ({ name, email, numbers }) => {
-        if (name.includes(query) || email.includes(query)) return true;
+        const matchName = name.toUpperCase().includes(neutralQuery);
+        const matchEmail = email.toUpperCase().includes(neutralQuery);
+        if (matchName || matchEmail) return true;
         return some(numbers, ({ label, digits }) => {
-          return label.includes(query) || digits.includes(query);
+          const matchLabel = label.toUpperCase().includes(neutralQuery);
+          const matchDigits = digits.toUpperCase().includes(neutralQuery);
+          return matchLabel || matchDigits;
         });
       });
     },
