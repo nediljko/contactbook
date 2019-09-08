@@ -1,13 +1,14 @@
 <template>
   <div class="modal is-active">
     <div class="modal-content">
-      <p class="title is-4">{{ message }}</p>
-      <div class="field is-grouped is-grouped-right">
+      <p class="modal-title">{{ title }}</p>
+      <p class="modal-message">{{ message }}</p>
+      <div class="field is-grouped">
         <div class="control">
-          <button @click.stop="close" class="button">No</button>
+          <button @click.stop="close" class="button cancel">Cancel</button>
         </div>
         <div class="control">
-          <button @click.stop="execute" class="button is-danger">Yes</button>
+          <button @click.stop="execute" class="button confirm">Delete</button>
         </div>
       </div>
     </div>
@@ -20,7 +21,8 @@ export default {
   props: {
     show: { type: Boolean, default: false },
     action: { type: Function, default: () => {} },
-    message: { type: String, default: 'Are you sure?' }
+    message: { type: String, default: 'Are you sure?' },
+    title: { type: String, default: 'Title' }
   },
   methods: {
     execute() {
@@ -37,9 +39,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin: 1rem 0.8rem;
-}
+@import '../stylesheets/main';
+@import '../stylesheets/theme';
 
 .modal {
   position: fixed;
@@ -48,8 +49,74 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 100000 !important;
   overflow-y: scroll !important;
   overflow-x: hidden;
-  background: rgba(black, 0.86);
+  background: rgba(black, 0.45);
+}
+
+.modal-content {
+  width: 80%;
+  font-size: 1.5rem;
+  background: $white;
+  border-radius: 0.5;
+  box-shadow: 0 0 14px 3px rgba(173, 174, 187, 1);
+
+  .modal-title {
+    padding: 2rem 2rem;
+    border-bottom: 1px solid grey;
+  }
+
+  .modal-message {
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .field.is-grouped {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+
+    .control {
+      width: 60%;
+      margin: 0;
+      padding: 1rem;
+
+      .button {
+        border-radius: 1rem;
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (min-width: $tablet) {
+    width: fit-content;
+
+    .modal-title {
+      padding: 1rem 2rem;
+    }
+
+    .field.is-grouped {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+    }
+
+    .control {
+      flex-basis: 40%;
+    }
+  }
+
+  .cancel, .confirm {
+    color: white;
+  }
+
+  .cancel {
+    background: $grey;
+  }
+
+  .confirm {
+    background: $twitter;
+  }
 }
 </style>
