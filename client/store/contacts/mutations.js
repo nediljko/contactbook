@@ -17,7 +17,6 @@ export const setImage = (state, { entry, image }) => {
 };
 
 export const setImages = (state, images) => {
-  console.log('set images');
   state.images = images;
 };
 
