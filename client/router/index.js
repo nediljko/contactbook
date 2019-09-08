@@ -22,11 +22,11 @@ const router = new Router({
       path: '/contact-details/:id',
       name: 'contact-details',
       component: ContactDetails
+    }, {
+      path: '/contact-entry',
+      name: 'contact-entry',
+      component: ContactEntry
     }]
-  }, {
-    path: '/contact-entry',
-    name: 'contact-entry',
-    component: ContactEntry
   }, fallbackRoute]
 });
 
