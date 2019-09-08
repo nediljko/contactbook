@@ -4,6 +4,9 @@
   "description": "Simple client for personal contacts",
   "scripts": {
     "dev:client": "poi --serve",
+    "lint": "npm run lint:js; npm run lint:scss",
+    "lint:js": "eslint --ext .js,.vue client",
+    "lint:scss": "stylelint \"client/**/*.vue\" \"client/**/*.scss\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
