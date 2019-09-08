@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="system-font-stack">
     <router-view />
   </div>
 </template>
@@ -11,6 +11,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import './stylesheets/main';
+@import './stylesheets/theme';
+
 * {
   box-sizing: border-box;
 }
@@ -28,5 +31,6 @@ html, body {
   overflow-y: scroll;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: $grey;
 }
 </style>
