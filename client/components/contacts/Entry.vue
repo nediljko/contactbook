@@ -220,6 +220,7 @@ export default {
       if (this.image !== this.images[this.entry.id]) {
         this.saveImage({ entry: this.entry, image: this.image });
       }
+      this.$router.push({ name: 'contact-list' });
     }
   },
   components: { ConfirmationModal, PictureInput }
