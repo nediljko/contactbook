@@ -54,7 +54,7 @@ import filter from 'lodash/filter';
 import some from 'lodash/some';
 
 const ALL_CONTACTS = 'All contacts';
-const FAVORITES = 'Favorites';
+const FAVORITES = 'My favorites';
 
 export default {
   name: 'contact-list',
