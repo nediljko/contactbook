@@ -1,46 +1,41 @@
 <template>
   <div class="columns is-multiline">
-    <div class="column is-12">
-      <div class="columns">
-        <div class="column is-12">
-          <div class="column is-6 has-text-right contacts-tab">
-            <button
-              @click="tab = tabs.ALL_CONTACTS"
-              :class="{ 'is-active': tab === tabs.ALL_CONTACTS }"
-              class="tab-button">
-              {{ allContacts }}
-            </button>
-          </div>
-          <div class="column is-6 favorites-tab">
-            <button
-              @click="tab = tabs.FAVORITES"
-              :class="{ 'is-active': tab === tabs.FAVORITES }"
-              class="tab-button">
-              {{ favoriteContacts }}
-            </button>
-          </div>
+    <div class="column is-12 tabs">
+      <div class="columns is-mobile">
+        <div class="column is-6 has-text-right contacts-tab is-paddingless">
+          <button
+            @click="tab = tabs.ALL_CONTACTS"
+            :class="{ 'is-not-active': tab !== tabs.ALL_CONTACTS }"
+            class="tab-button">
+            {{ allContacts }}
+          </button>
+        </div>
+        <div class="column is-6 favorites-tab is-paddingless">
+          <button
+            @click="tab = tabs.FAVORITES"
+            :class="{ 'is-not-active': tab !== tabs.FAVORITES }"
+            class="tab-button">
+            {{ favoriteContacts }}
+          </button>
         </div>
       </div>
     </div>
     <div class="column is-12 filter">
       <div class="field">
-        <p class="control has-icons-left has-icons-right is-loading">
-          <input class="input" type="text">
+        <p class="control has-icons-left">
+          <input v-model="query" class="input is-medium" type="text">
           <span class="icon is-left">
             <i class="mdi mdi-magnify"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-check"></i>
           </span>
         </p>
       </div>
     </div>
-    <div class="column is-12">
+    <div class="column is-12 items">
       <div class="columns is-multiline">
         <div v-if="tab === tabs.ALL_CONTACTS" class="column is-3">
           <card :content="{}" isNew></card>
         </div>
-        <div v-for="contact in list" :key="contact.id" class="column is-3">
+        <div v-for="contact in contactList" :key="contact.id" class="column is-3">
           <card
             @click.native="focused = contact"
             :content="contact"
@@ -55,6 +50,8 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import Card from './Card';
+import filter from 'lodash/filter';
+import some from 'lodash/some';
 
 const ALL_CONTACTS = 'All contacts';
 const FAVORITES = 'Favorites';
@@ -64,7 +61,8 @@ export default {
   data() {
     return {
       tab: ALL_CONTACTS,
-      focused: {}
+      focused: {},
+      query: ''
     };
   },
   computed: {
@@ -76,8 +74,16 @@ export default {
     favoriteContacts() {
       return FAVORITES;
     },
-    list() {
-      return this.tab === ALL_CONTACTS ? this.contacts : this.favorites;
+    contactList() {
+      const { query, tab, contacts, favorites } = this;
+      const list = tab === ALL_CONTACTS ? contacts : favorites;
+      if (!query) return list;
+      return filter(list, ({ name, email, numbers }) => {
+        if (name.includes(query) || email.includes(query)) return true;
+        return some(numbers, ({ label, digits }) => {
+          return label.includes(query) || digits.includes(query);
+        });
+      });
     },
     tabs() {
       return { ALL_CONTACTS, FAVORITES };
@@ -92,11 +98,56 @@ export default {
 @import '../../stylesheets/theme';
 
 .tab-button {
-  border: none;
+  margin: 2rem 0 2rem 1rem;
   padding: 0 1rem;
+  color: $twitter;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: inherit;
+  border: none;
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.is-not-active {
+  color: $tab-inactive;
+}
+
+.filter {
+  padding: 0.75rem 2rem;
+
+  .mdi {
+    padding-top: 0.5rem;
+    font-size: 1.6rem;
+  }
+
+  input {
+    box-shadow: 0 0 14px 3px rgba(176,162,176,0.29);
+  }
+
+  @media screen and (min-width: $tablet) {
+    padding: 0.75rem;
+
+    .field {
+      max-width: 50%;
+      margin: 1rem auto 2rem;
+    }
+  }
+}
+
+.tabs {
+  padding: 0.75rem 3rem;
+
+  @media screen and (min-width: $tablet) {
+    padding: 0.75rem;
+  }
+}
+
+.items {
+  @media screen and (min-width: $tablet) {
+    padding: 0.75rem 3rem;
   }
 }
 
@@ -105,6 +156,6 @@ export default {
 }
 
 .contacts-tab, .favorites-tab {
-  border-bottom: 1px solid $twitter;
+  border-bottom: 2px solid $twitter;
 }
 </style>
