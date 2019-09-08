@@ -14,7 +14,7 @@
     <figure @click="goToDetails" class="image-container">
       <img
         :src="image"
-        alt="Profile image."
+        alt="Profile image. Links to contact details."
         class="image"/>
       <span>{{ content.name }}</span>
     </figure>
